@@ -3,8 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const FormData = require('./formdata'); // Import the Mongoose model
-require('dotenv').config();
-conCheck();
+ 
 const app = express();
 app.use(cors());
 
@@ -14,7 +13,7 @@ app.use(express.json());
 async function conCheck() {
   try {
     // Use environment variable for the password
-    const password = process.env.PASSWORD || 'your_default_password';
+     
     await mongoose.connect(
       `mongodb+srv://arjunsingh27:Test123@cluster0.0t9vaxx.mongodb.net/test`,
       {
