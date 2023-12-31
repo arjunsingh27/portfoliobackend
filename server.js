@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const FormData = require('./formdata'); // Import the Mongoose model
+require('dotenv').config();
+conCheck();
 const app = express();
 app.use(cors());
 
@@ -52,7 +54,6 @@ app.post('/contact', async (req, res) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+app.listen(process.env.PORT || 4000,function(req,res){
+  console.log("Server Started .........");
+})
