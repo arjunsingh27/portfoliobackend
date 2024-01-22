@@ -15,7 +15,7 @@ async function conCheck() {
     // Use environment variable for the password
      
     await mongoose.connect(
-      `mongodb+srv://arjunsingh27:Test123@cluster0.0t9vaxx.mongodb.net/test`,
+      `mongodb+srv://arjunsingh27:Test123@cluster0.0t9vaxx.mongodb.net/arjun.ltd`,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
