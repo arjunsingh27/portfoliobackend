@@ -22,7 +22,7 @@ const projectsSchema = new mongoose.Schema({
     required: true,
   },
   datecreated: {
-    type: Date,
+    type: String,
     required: true,
   }
 });
