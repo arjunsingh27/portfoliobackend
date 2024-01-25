@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const FormData = require('./formdata'); // Import the Mongoose model
+const projects = require('./projects');
  
 const app = express();
 app.use(cors());
@@ -49,6 +50,20 @@ app.post('/contact', async (req, res) => {
   } catch (error) {
     console.error('Error saving form data:', error);
     res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+app.get('/',(req,res) => {
+  res.send("Hello World");
+});
+
+
+app.get('/projects', async (req, res) => {
+  try {
+    const projectList = await projects.find();
+    res.json(projectList);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
