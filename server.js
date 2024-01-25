@@ -53,10 +53,9 @@ app.post('/contact', async (req, res) => {
   }
 });
 
-app.get('/',(req,res) => {
-  res.send("Hello World");
+app.get('/', (req, res) => {
+  res.json({ message: "Hello Welcome to the My PortFolio" });
 });
-
 
 app.get('/projects', async (req, res) => {
   try {
