@@ -59,7 +59,7 @@ app.get('/', (req, res) => {
 
 app.get('/projects', async (req, res) => {
   try {
-    const projectList = await projects.find();
+    const projectList = await projects.find().sort({ id: 1 });
     res.json(projectList);
   } catch (err) {
     res.status(500).json({ error: err.message });
