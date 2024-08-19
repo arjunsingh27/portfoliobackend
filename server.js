@@ -2,19 +2,19 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const FormData = require('./formdata'); // Import the Mongoose model
-const projects = require('./projects');
- 
+const bodyParser = require('body-parser');
+const FormData = require('./formdata'); // Import the Mongoose model for form data
+const Projects = require('./projects'); // Correct import for Projects model
+
 const app = express();
 app.use(cors());
 
 // Middleware to parse JSON data
-app.use(express.json());
+app.use(bodyParser.json()); // Parse JSON bodies
 
 async function conCheck() {
   try {
-    // Use environment variable for the password
-     
+    // Use environment variable for MongoDB connection string
     await mongoose.connect(
       `mongodb+srv://arjunsingh27:Test123@cluster0.0t9vaxx.mongodb.net/arjunltd`,
       {
@@ -54,12 +54,12 @@ app.post('/contact', async (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.json({ message: "Hello Welcome to the My PortFolio" });
+  res.json({ message: "Hello Welcome to My Portfolio" });
 });
 
 app.get('/projects', async (req, res) => {
   try {
-    const projectList = await projects.find().sort({ id: 1 });
+    const projectList = await Projects.find().sort({ id: 1 }); // Use Projects model
     res.json(projectList);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -67,12 +67,13 @@ app.get('/projects', async (req, res) => {
 });
 
 app.post('/projects', async (req, res) => {
-  try {
-    const { projecttitle, projectdescription, projectimage, url, githubUrl, datecreated, passward } = req.body;
+  const { projecttitle, projectdescription, projectimage, url, githubUrl, datecreated, passward } = req.body;
+  console.log("Project Form Input:", projecttitle, projectdescription, projectimage, url, githubUrl, datecreated, passward);
 
+  try {
     // Check if passward matches the expected value
-    if (passward !== '12345') {
-      return res.status(403).json({ message: 'Invalid passward' });
+    if (passward !== "12345") { // Use the correct password check
+      return res.status(403).json({ message: 'Invalid password' });
     }
 
     // Create a new project instance
@@ -97,8 +98,7 @@ app.post('/projects', async (req, res) => {
   }
 });
 
-
 // Start the server
-app.listen(process.env.PORT || 4000,function(req,res){
+app.listen(process.env.PORT || 4000, () => {
   console.log("Server Started .........");
-})
+});
