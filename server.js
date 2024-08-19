@@ -66,7 +66,7 @@ app.get('/projects', async (req, res) => {
   }
 });
 
-router.post('/projects', async (req, res) => {
+app.post('/projects', async (req, res) => {
   try {
     const { projecttitle, projectdescription, projectimage, url, githubUrl, datecreated, passward } = req.body;
 
