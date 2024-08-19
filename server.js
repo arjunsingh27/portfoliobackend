@@ -66,6 +66,38 @@ app.get('/projects', async (req, res) => {
   }
 });
 
+router.post('/projects', async (req, res) => {
+  try {
+    const { projecttitle, projectdescription, projectimage, url, githubUrl, datecreated, passward } = req.body;
+
+    // Check if passward matches the expected value
+    if (passward !== '12345') {
+      return res.status(403).json({ message: 'Invalid passward' });
+    }
+
+    // Create a new project instance
+    const newProject = new Projects({
+      projecttitle,
+      projectdescription,
+      projectimage,
+      url,
+      githubUrl,
+      datecreated,
+      passward, // Assuming you want to save the passward as well
+    });
+
+    // Save the project to the database
+    const savedProject = await newProject.save();
+
+    // Send a success response
+    res.status(201).json(savedProject);
+  } catch (error) {
+    // Send an error response
+    res.status(500).json({ message: 'Failed to add project', error });
+  }
+});
+
+
 // Start the server
 app.listen(process.env.PORT || 4000,function(req,res){
   console.log("Server Started .........");
