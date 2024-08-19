@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const projectsSchema = new mongoose.Schema({
-  id: {
-    type: String,
-    required: true,
-  },
   projecttitle: {
     type: String,
     required: true,
@@ -21,12 +17,21 @@ const projectsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  datecreated: {
+  githubUrl: {
     type: String,
     required: true,
-  }
+  },
+  datecreated: {
+    type: Date,
+    default: Date.now, // Automatically set the current date and time
+    required: true,
+  },
+  passward: {
+    type: String,
+    required: true,
+  },
 });
 
-const projects = mongoose.model('projects', projectsSchema);
+const Projects = mongoose.model('Projects', projectsSchema);
 
-module.exports = projects;
+module.exports = Projects;
