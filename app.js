@@ -2,6 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+<<<<<<< HEAD:app.js
 const bodyParser = require('body-parser');
 const FormData = require('./formdata'); // Import the Mongoose model for form data
 const Projects = require('./projects'); // Correct import for Projects model
@@ -9,15 +10,21 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 
+=======
+const FormData = require('./formdata'); // Import the Mongoose model
+const projects = require('./projects');
+ 
+>>>>>>> parent of bb02c5c (updated backend and fixed issue using body-parser):server.js
 const app = express();
 app.use(cors());
 
 // Middleware to parse JSON data
-app.use(bodyParser.json()); // Parse JSON bodies
+app.use(express.json());
 
 async function conCheck() {
   try {
-    // Use environment variable for MongoDB connection string
+    // Use environment variable for the password
+     
     await mongoose.connect(
       process.env.MONGODBURI,
       console.log("MongoDB Connected"+process.env.MONGODBURI),
@@ -58,12 +65,12 @@ app.post('/contact', async (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.json({ message: "Hello Welcome to My Portfolio" });
+  res.json({ message: "Hello Welcome to the My PortFolio" });
 });
 
 app.get('/projects', async (req, res) => {
   try {
-    const projectList = await Projects.find().sort({ id: 1 }); // Use Projects model
+    const projectList = await projects.find().sort({ id: 1 });
     res.json(projectList);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -71,13 +78,12 @@ app.get('/projects', async (req, res) => {
 });
 
 app.post('/projects', async (req, res) => {
-  const { projecttitle, projectdescription, projectimage, url, githubUrl, datecreated, passward } = req.body;
-  console.log("Project Form Input:", projecttitle, projectdescription, projectimage, url, githubUrl, datecreated, passward);
-
   try {
+    const { projecttitle, projectdescription, projectimage, url, githubUrl, datecreated, passward } = req.body;
+
     // Check if passward matches the expected value
-    if (passward !== "12345") { // Use the correct password check
-      return res.status(403).json({ message: 'Invalid password' });
+    if (passward !== '12345') {
+      return res.status(403).json({ message: 'Invalid passward' });
     }
 
     // Create a new project instance
@@ -102,7 +108,14 @@ app.post('/projects', async (req, res) => {
   }
 });
 
+
 // Start the server
+<<<<<<< HEAD:app.js
 app.listen(process.env.PORT , () => {
   console.log("Server Started .........at "+ process.env.PORT);
 });
+=======
+app.listen(process.env.PORT || 4000,function(req,res){
+  console.log("Server Started .........");
+})
+>>>>>>> parent of bb02c5c (updated backend and fixed issue using body-parser):server.js
