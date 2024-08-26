@@ -5,6 +5,9 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const FormData = require('./formdata'); // Import the Mongoose model for form data
 const Projects = require('./projects'); // Correct import for Projects model
+const dotenv = require('dotenv');
+dotenv.config();
+
 
 const app = express();
 app.use(cors());
@@ -16,7 +19,8 @@ async function conCheck() {
   try {
     // Use environment variable for MongoDB connection string
     await mongoose.connect(
-      `mongodb+srv://arjunsingh27:Test123@cluster0.0t9vaxx.mongodb.net/arjunltd`,
+      process.env.MONGODBURI,
+      console.log("MongoDB Connected"+process.env.MONGODBURI),
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -99,6 +103,6 @@ app.post('/projects', async (req, res) => {
 });
 
 // Start the server
-app.listen(process.env.PORT || 4000, () => {
-  console.log("Server Started .........");
+app.listen(process.env.PORT , () => {
+  console.log("Server Started .........at "+ process.env.PORT);
 });

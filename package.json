@@ -1,10 +1,10 @@
 {
-  "name": "server",
+  "name": "app",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "start:server": "node server.js",
+    "start:server": "node app.js",
     "start:client": "cd /Users/arjunsingh/Downloads/Btech/V_Sem/Projects/arjunsingh/client && npm start",
     "start": "concurrently \"npm run start:server\" \"npm run start:client\""
   },
@@ -15,6 +15,7 @@
     "body-parser": "^1.20.2",
     "concurrently": "^8.2.2",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.18.2",
     "mongoose": "^8.0.3",
     "nodemon": "^3.0.2",
