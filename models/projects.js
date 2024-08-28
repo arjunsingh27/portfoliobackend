@@ -11,7 +11,7 @@ const projectsSchema = new mongoose.Schema({
   },
   projectimage: {
     type: String,
-    required: true,
+    // required: false,
   },
   url: {
     type: String,
