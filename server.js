@@ -5,6 +5,7 @@ const database = require('./config/database');
 const contactRoutes = require('./routes/contact');
 const projectRoutes = require('./routes/projects');
 const indexRoutes = require('./routes/index');
+const blogsRoutes = require('./routes/blogs');
 
 const app = express();
 app.use(cors());
@@ -19,6 +20,7 @@ database.connect();
 app.use('/', indexRoutes);
 app.use('/contact', contactRoutes);
 app.use('/projects', projectRoutes);
+app.use('/blogs',blogsRoutes);
 
 // Start the server
 app.listen(process.env.PORT || 4000, () => {
