@@ -24,5 +24,5 @@ app.use('/blogs',blogsRoutes);
 
 // Start the server
 app.listen(process.env.PORT || 4000, () => {
-  console.log('Server Started .........');
+  console.log('Server Started ..........');
 });
